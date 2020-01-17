@@ -19,5 +19,8 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    // set up the saved items from NSUderDefaults
+}
 
 @end
