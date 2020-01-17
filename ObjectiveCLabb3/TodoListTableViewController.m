@@ -6,13 +6,13 @@
 //  Copyright © 2020 Christian Jäderberg. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "TodoListTableViewController.h"
 
-@interface ViewController ()
+@interface TodoListTableViewController ()
 
 @end
 
-@implementation ViewController
+@implementation TodoListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
