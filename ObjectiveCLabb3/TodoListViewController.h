@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TodoListTableViewController : UITableViewController
+@interface TodoListViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 
 @end
