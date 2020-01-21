@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *todoTextField;
 @property (weak, nonatomic) IBOutlet UIButton *addItemButton;
 
+@property (nonatomic) NSUserDefaults *userDefaults;
 @property (nonatomic) NSMutableArray *items;
 
 @end
@@ -25,9 +26,22 @@
     // hide keyboard code
     self.todoTextField.delegate = self;
     
-    // create array with dictionary items
-    self.items = @[@{@"name": @"Gör det här", @"completed": @NO}, @{@"name": @"Gör det här också", @"completed": @YES}.mutableCopy].mutableCopy;
+    [self checkForSavedList];
+}
+
+- (void)checkForSavedList {
+    self.userDefaults = [NSUserDefaults standardUserDefaults];
     
+    // load list from userdefaults if there is a saved list
+    if ([self.userDefaults arrayForKey:@"todolist"]) {
+        self.items = [self.userDefaults arrayForKey:@"todolist"].mutableCopy;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    self.userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [self.userDefaults setObject:self.items forKey:@"todolist"];
 }
 
 // hide keyboard when enter is pressed
@@ -102,7 +116,13 @@
     if (![newItemName isEqualToString:@""]) {
         // save current textfield-text as new todo-item
         NSMutableDictionary *newItem = @{@"name": newItemName, @"completed": @NO}.mutableCopy;
-        [self.items addObject:newItem];
+        
+        // check if items-array is empty, if so instantiate it, otherwise just add new item
+        if (self.items) {
+            [self.items addObject:newItem];
+        } else {
+            self.items = @[newItem].mutableCopy;
+        }
            
         // clear textfield
         self.todoTextField.text = @"";
@@ -112,9 +132,9 @@
         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else {
         // create and show alert message
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Fel inmatning!" message:@"Du behöver skriva något" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Tom inmatning!" message:@"Du behöver skriva något." preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         }];
         
         [alert addAction:actionOk];
