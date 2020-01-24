@@ -23,31 +23,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // hide keyboard code
+    // code needed for hiding keyboard when enter is pressed
     self.todoTextField.delegate = self;
     
+    // check if saved list exists and load it
     [self checkForSavedList];
 }
 
+// load list from UserDefaults if there is a saved list
 - (void)checkForSavedList {
     self.userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    // load list from userdefaults if there is a saved list
     if ([self.userDefaults arrayForKey:@"todolist"]) {
         self.items = [self.userDefaults arrayForKey:@"todolist"].mutableCopy;
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    // save list to UserDefaults
     self.userDefaults = [NSUserDefaults standardUserDefaults];
-    
     [self.userDefaults setObject:self.items forKey:@"todolist"];
 }
 
 // hide keyboard when enter is pressed
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    
     return true;
 }
 
@@ -55,6 +54,42 @@
 - (IBAction)addItemButtonPressed:(id)sender {
     [self addNewItem];
 }
+
+- (void)addNewItem {
+    // get text from textfield
+    NSString *newItemName = self.todoTextField.text;
+    
+    // check if textfield is empty, if it is show alert, otherwise save and show new todo item
+    if (![newItemName isEqualToString:@""]) {
+        // save current textfield-text as new todo-item
+        NSMutableDictionary *newItem = @{@"name": newItemName, @"completed": @NO}.mutableCopy;
+        
+        // check if items-array is empty, if so instantiate it, otherwise just add new item
+        if (self.items) {
+            [self.items addObject:newItem];
+        } else {
+            self.items = @[newItem].mutableCopy;
+        }
+           
+        // clear textfield
+        self.todoTextField.text = @"";
+           
+        // show new item in tableview
+        NSInteger indexPath = self.items.count - 1;
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else {
+        // create and show alert message
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Tom inmatning!" message:@"Du behöver skriva något." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        
+        [alert addAction:actionOk];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+# pragma mark - TableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -106,40 +141,6 @@
     
     // deselect the row to remove grey selection
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (void)addNewItem {
-    // get text from textfield
-    NSString *newItemName = self.todoTextField.text;
-    
-    // check if textfield is empty, if it is show alert, otherwise save and show new todo item
-    if (![newItemName isEqualToString:@""]) {
-        // save current textfield-text as new todo-item
-        NSMutableDictionary *newItem = @{@"name": newItemName, @"completed": @NO}.mutableCopy;
-        
-        // check if items-array is empty, if so instantiate it, otherwise just add new item
-        if (self.items) {
-            [self.items addObject:newItem];
-        } else {
-            self.items = @[newItem].mutableCopy;
-        }
-           
-        // clear textfield
-        self.todoTextField.text = @"";
-           
-        // show new item in tableview
-        NSInteger indexPath = self.items.count - 1;
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    } else {
-        // create and show alert message
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Tom inmatning!" message:@"Du behöver skriva något." preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        
-        [alert addAction:actionOk];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
 }
 
 @end

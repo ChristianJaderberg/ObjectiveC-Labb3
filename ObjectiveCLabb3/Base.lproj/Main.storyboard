@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MhO-Uu-Q7o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MhO-Uu-Q7o">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,16 +20,16 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="DTW-iz-xgg" style="IBUITableViewCellStyleDefault" id="BW2-wH-lKY">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="46.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BW2-wH-lKY" id="GFN-xq-0v8">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="46.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DTW-iz-xgg">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="46.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -44,13 +44,16 @@
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter new todo here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EGl-oF-WXf">
                                 <rect key="frame" x="20.5" y="771" width="373" height="44.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9n-i7-cua">
-                                <rect key="frame" x="103.5" y="825.5" width="207" height="45"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Add Todo Item"/>
+                                <rect key="frame" x="20.5" y="825.5" width="373" height="45"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Add Todo Item">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
                                     <action selector="addItemButtonPressed:" destination="MhO-Uu-Q7o" eventType="touchUpInside" id="0H2-FI-RQt"/>
                                 </connections>
@@ -66,7 +69,7 @@
                             <constraint firstItem="yhE-5T-yCH" firstAttribute="height" secondItem="wcg-we-e30" secondAttribute="height" multiplier="0.8" id="c4l-if-MTY"/>
                             <constraint firstItem="i9n-i7-cua" firstAttribute="centerX" secondItem="wcg-we-e30" secondAttribute="centerX" id="jRP-wA-rE6"/>
                             <constraint firstItem="yhE-5T-yCH" firstAttribute="top" secondItem="4rT-RG-ZaC" secondAttribute="top" id="nSj-iA-1JI"/>
-                            <constraint firstItem="i9n-i7-cua" firstAttribute="width" secondItem="wcg-we-e30" secondAttribute="width" multiplier="0.5" id="pnR-49-lAf"/>
+                            <constraint firstItem="i9n-i7-cua" firstAttribute="width" secondItem="wcg-we-e30" secondAttribute="width" multiplier="0.9" id="pnR-49-lAf"/>
                             <constraint firstItem="i9n-i7-cua" firstAttribute="top" secondItem="EGl-oF-WXf" secondAttribute="bottom" constant="10" id="pxx-AR-N92"/>
                             <constraint firstItem="EGl-oF-WXf" firstAttribute="centerX" secondItem="wcg-we-e30" secondAttribute="centerX" id="rSc-cb-mQH"/>
                             <constraint firstItem="EGl-oF-WXf" firstAttribute="top" secondItem="yhE-5T-yCH" secondAttribute="bottom" constant="10" id="yTh-N2-Xu7"/>
